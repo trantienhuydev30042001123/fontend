@@ -1,0 +1,61 @@
+<app-nav-bar></app-nav-bar>
+<ng-container *ngIf="cart.length != 0">
+  <div class="container">
+    <div class="card">
+      <h2 class="card-title"> Giỏ hàng</h2>
+      <div class="card-table">
+        <div class="cart-product">
+          <table class="table table-responsive table-cart">
+            <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên sản phẩm</th>
+              <th>Hình ảnh sản phẩm</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let p of cart|  paginate: { itemsPerPage: 3, currentPage: p }, let i= index ">
+              <td>{{i + 1}}</td>
+              <td class="nameP">{{p.nameP}}</td>
+              <td class="imageP"><img src="{{p.imageP}}"></td>
+              <td>{{p.priceP}}đ</td>
+              <td>{{p.quantity}}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteCart(p.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+            <div class="page" *ngIf="cart.length > 3">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          </table>
+        </div>
+        <div class="oder" *ngFor="let c of cart">
+          <h4>Tổng tiền : {{c.totalMoney}} VNĐ</h4>
+          <button class="btn btn-danger">Thanh toán</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="cart.length == 0">
+  <div class="container">
+    <div class="card">
+      <h2 class="card-title"> Giỏ hàng</h2>
+    </div>
+    <div class="center">
+      <img
+        src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
+        alt="">
+      <h2>Giỏ hàng của bạn hện tại đang trống!</h2>
+      <h4>Vui lòng thêm sản phẩm vào giỏ hàng!</h4>
+      <button routerLink="/home" class="btn btn-primary">Trang sản phẩm</button>
+    </div>
+  </div>
+</ng-container>
+<app-footer></app-footer>

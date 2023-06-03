@@ -1,0 +1,37 @@
+
+.container1{
+  background-image: url("src/assets/img/background.jpg");
+  height: 100%;
+  background-size: cover;
+}
+.row-lognup{
+  margin: 0!important;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.form-register{
+  text-align: center;
+  background: transparent!important;
+  backdrop-filter: blur(100px);
+}
+.row-lognup .mat-mdc-card {
+  background-color: transparent;
+}
+.logup-text{
+  font-size: 40px;
+  font-weight: 500;
+  margin-top: 15px;
+}
+.form-register1{
+  width: 400px;
+  margin: auto;
+  margin-top: 100px;
+}
+.input1{
+  margin-top: 15px;
+}
+
+.lognin{
+  margin-bottom: 20px;
+}

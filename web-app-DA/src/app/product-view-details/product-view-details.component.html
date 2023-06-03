@@ -1,0 +1,35 @@
+<div class="container1 pt-5 ">
+  <div>
+    <button class="close" type="button" mat-icon-button (click)="close('No answer')" tabindex="-1">
+      <mat-icon><b>close</b></mat-icon>
+    </button>
+  </div>
+  <div class="row product-detail ">
+    <div class="col-6 product-image ">
+        <img class="product-image-1" src="{{singleProduct.image}}">
+      <div class="image-buttom">
+        <img class="product-image-2" src="{{singleProduct.image}}">
+        <img class="product-image-2" src="{{singleProduct.image2}}">
+        <img class="product-image-2" src="{{singleProduct.image3}}">
+      </div>
+    </div>
+    <div class="col-6 product-details">
+      <div class="product-information">
+        <div class="">
+          <h2>{{singleProduct.name}}</h2>
+        </div>
+        <div class="mt-2 product-description">
+          MÔ TẢ SẢN PHẨM: <br>
+          {{singleProduct.description}}
+        </div>
+        <div class=" product-price mt-4">
+          <p class="product-price-start">{{singleProduct.price}}đ</p>
+          <p><b>{{singleProduct.lastprice}}đ</b></p>
+        </div>
+        <div class="mt-3 text-center">
+          <button mat-raised-button color="warn" (click)="addToCart()">Thêm vào giỏ hàng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
