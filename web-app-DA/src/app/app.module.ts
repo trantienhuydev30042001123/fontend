@@ -33,7 +33,9 @@ import {RatingModule} from 'ng-starrating';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {DialogConfirmModule} from "./dialog-confirm/dialog-confirm.module";
 import {DialogConfirmComponent} from "./dialog-confirm/dialog-confirm.component";
-
+import { ProfileComponent } from './profile/profile.component';
+import { BuyProductComponent } from './buy-product/buy-product.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const appRoutes: Routes = [
   {path:'',redirectTo:'home', pathMatch:"full"},
@@ -46,6 +48,8 @@ const appRoutes: Routes = [
   {path:'product/:id', component:ProductViewDetailsComponent},
   {path:'cart', component:CartComponent},
   {path:'Category', component:ProductCategoryComponent},
+  {path:'profile', component:ProfileComponent},
+  {path:'buy-product', component:BuyProductComponent},
 ];
 @NgModule({
   bootstrap: [AppComponent],
@@ -61,7 +65,9 @@ const appRoutes: Routes = [
     CartComponent,
     IntroduceComponent,
     ProductCategoryComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    ProfileComponent,
+    BuyProductComponent
   ],
     imports: [
         HttpClientModule,
@@ -85,7 +91,8 @@ const appRoutes: Routes = [
         NgbModule,
         NgxStarRatingModule,
         RatingModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        FlexLayoutModule
     ],
   providers: []
 })

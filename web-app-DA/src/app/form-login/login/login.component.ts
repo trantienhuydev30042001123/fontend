@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {SignIn} from "../../model/SignIn";
 import {AuthService} from "../../service/auth.service";
 import {TokenService} from "../../service/token.service";
@@ -30,8 +30,8 @@ export class LoginComponent {
         this.tokenService.setToken(data.token);
         this.tokenService.setName(data.name);
         this.tokenService.setRole(data.roles);
-        this.router.navigate(['home']).then(()=>{
-          window.location.reload();
+        this.router.navigate(['home'],{
+          queryParams: {data:data.id}
         })
       }
     })

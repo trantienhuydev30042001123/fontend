@@ -16,6 +16,7 @@ import {ProductViewDetailsComponent} from "../product-view-details/product-view-
 })
 export class ProductCategoryComponent implements OnInit{
   product: productDTO[] = [];
+  p: number = 1;
   categoryId : number;
   constructor(private router: ActivatedRoute,
               private helperService: HelperService,

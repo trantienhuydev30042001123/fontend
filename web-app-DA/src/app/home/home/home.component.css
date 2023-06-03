@@ -5,11 +5,12 @@
   z-index: 10;
 }
 .carousel-container{
- position:  relative;
-  margin: auto;
-  text-align: center;
-  width: 100%;
-  box-shadow: 0 8px 16px #dce1e1;
+  width: 90% ;
+  margin: 0 auto;
+  padding-top: 10px;
+  position: relative;
+  /*border-radius: 8px;*/
+  /*overflow: hidden;*/
 
 }
 .carousel-container img {
@@ -62,4 +63,7 @@ opacity: 1;
 }
 .footer{
   padding-top: 40px;
+}
+.fade{
+  border-radius: 15px;
 }

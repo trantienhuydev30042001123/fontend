@@ -13,33 +13,34 @@ export class TokenService {
     window.localStorage.removeItem(TOKEN_KEY);
     window.localStorage.setItem(TOKEN_KEY,token);
   }
-  public getToken(): string {
-    // @ts-ignore
-    return localStorage.getItem(TOKEN_KEY);
+  public getToken(): string | null {
+    const token = localStorage.getItem(TOKEN_KEY);
+    return token !== null ? token : null;
   }
   public setName(name: string){
     window.localStorage.removeItem(NAME_KEY);
     window.localStorage.setItem(NAME_KEY,name);
   }
 
-  public getName(): string{
-    // @ts-ignore
-    return window.localStorage.getItem(NAME_KEY);
+  public getName(): string | null{
+    const name = localStorage.getItem(NAME_KEY);
+    return name !== null ? name : null;
   }
 
   public setRole(roles: string[]){
     window.sessionStorage.removeItem(ROLE_KEY);
     window.sessionStorage.setItem(ROLE_KEY,JSON.stringify(roles));
   }
-  public getRole(): string[]{
+  public getRole(): string[] {
     this.roles = [];
-    if (sessionStorage.getItem(TOKEN_KEY)){
-      // @ts-ignore
-      JSON.parse(sessionStorage.getItem(ROLE_KEY)).forEach(role =>{
-        this.roles.push(role.authority)
-      })
+    const roleString = sessionStorage.getItem(ROLE_KEY);
+    if (roleString !== null) {
+      const parsedRoles = JSON.parse(roleString);
+      parsedRoles.forEach((role: any) => {
+        this.roles.push(role.authority);
+      });
     }
-    return this.roles
+    return this.roles;
   }
 
   public logOut(){

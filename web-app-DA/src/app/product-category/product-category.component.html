@@ -2,7 +2,7 @@
   <app-nav-bar class="navbar1"></app-nav-bar>
   <div class="container1 mt-5">
     <mat-grid-list class="view-project"  cols="5"  rowHeight="2:3" gutterSize="20">
-      <mat-grid-tile *ngFor="let p of product">
+      <mat-grid-tile *ngFor="let p of product|  paginate: { itemsPerPage: 10, currentPage: p }">
         <div class="row home-page-product-image"  >
           <div class="product-image">
             <img  src="{{p.image}}">
@@ -23,6 +23,9 @@
         </div>
       </mat-grid-tile>
     </mat-grid-list>
+  </div>
+  <div class="page">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
   <div class="footer">
     <app-footer ></app-footer>

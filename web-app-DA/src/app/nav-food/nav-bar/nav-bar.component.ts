@@ -12,7 +12,7 @@ import {productDTO} from "../../dto/ProductDTO";
 export class NavBarComponent implements OnInit{
   carId : number;
  totalItem : number = 0;
-  name: string;
+  name: string | null;
   checkLogin = false;
 
   constructor(private tokenService: TokenService,

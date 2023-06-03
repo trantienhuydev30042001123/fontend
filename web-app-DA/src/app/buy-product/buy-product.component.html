@@ -1,0 +1,67 @@
+<app-nav-bar></app-nav-bar>
+<div class="container mt-5 order1">
+  <div class="card">
+    <div class="row">
+      <div class=" order col-6">
+        <form #orderForm = "ngForm" (ngSubmit)="abcd(orderForm) ">
+          <h2 >Vui lòng nhập thông Tin </h2>
+          <mat-form-field appearance="outline"
+          class="w-75 example-full-width" >
+            <mat-label> Họ và tên</mat-label>
+            <input matInput
+                   [(ngModel)]="order.fullname"
+            name="fullname" >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline"
+                          class="w-75">
+            <mat-label> Địa chỉ</mat-label>
+            <input matInput
+                   [(ngModel)]="order.address"
+                   name="fullname">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline"
+                          class="w-75">
+            <mat-label> Số điện thoại </mat-label>
+            <input matInput
+                   [(ngModel)]="order.sdt"
+                   name="fullname">
+          </mat-form-field>
+          <div>
+            <mat-label style="font-weight: bold">Phương thức thanh toán : (Thanh toán khi nhận hàng.)</mat-label>
+          </div>
+          <div align="right" style="margin-top: 20px">
+            <button type="submit" mat-raised-button color="warn"> Đặt hàng</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-6">
+        <table class="table">
+          <thead class="thead">
+          <tr>
+            <th>STT</th>
+            <th>Tên sản phẩm</th>
+            <th>Ảnh</th>
+            <th>Số lượng</th>
+            <th>Giá sản phẩm</th>
+          </tr>
+          </thead>
+          <tbody class="tbody">
+          <tr *ngFor="let p of cart, let i= index ">
+            <td>{{i + 1}}</td>
+            <td class="nameP">{{p.nameP}}</td>
+            <td class="imageP"><img src="{{p.imageP}}"></td>
+            <td>{{p.quantity}}</td>
+            <td>{{p.priceP}}đ</td>
+          </tr>
+          </tbody>
+          <div class="total">
+            <p class="p-total">Thành tiền : {{totalMoney}}đ</p>
+          </div>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

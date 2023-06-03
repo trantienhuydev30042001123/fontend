@@ -4,6 +4,7 @@ import {environment} from "../../environment/environment.pord";
 import {Injectable} from "@angular/core";
 import {catchError, Observable, of} from "rxjs";
 import {productDTO} from "../dto/ProductDTO";
+import {order} from "../buy-product/interface/order";
 @Injectable({
   providedIn:'root'
 })
@@ -32,6 +33,14 @@ export class HelperService {
     });
   }
   public findInfoById(apiURL: string, id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.baseURL + apiURL + "/" + id, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+  public findInfoByIdN(apiURL: string, id: number): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.baseURL + apiURL + "/" + id, this.httpOptions)
         .subscribe((response: any) => {
@@ -73,6 +82,22 @@ export class HelperService {
   public deleteById(apiURL: string, entity: any,): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient.delete(this.baseURL + apiURL + "/" + entity, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+  public deleteAll(apiURL: string, entity: any,): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.baseURL + apiURL + "/delete" , entity, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+  public oder(apiURL: string, order:order,): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.baseURL + apiURL, order, this.httpOptions)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);

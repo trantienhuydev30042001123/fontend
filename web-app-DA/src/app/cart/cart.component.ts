@@ -20,6 +20,11 @@ export class CartComponent implements OnInit {
   cart: cartDTO[] = [];
   product: productDTO[];
   p: number = 1;
+  totalMoney: number;
+  idC: number[];
+  idP: number[];
+  products: any[];
+
 
   ngOnInit(): void {
     this.getListCart();
@@ -54,18 +59,36 @@ export class CartComponent implements OnInit {
 
               let total = 0;
               let carts = res;
-              carts.forEach((item :any) =>{
-                if (item.product){
-                  const priceA = a.product;
-                  total += (priceA.price - (priceA.price * priceA.discount / 100)) * a.quantity;
-                }
-                // total += item.priceP * item.quantity;
-                // a.totalMonney = total ;
+              carts.forEach((item: any) => {
+                total += item.priceP;
               })
-              a.totalMoney = total;
+              this.totalMoney = total;
+
             }
           }
+          let products: any[] = [];
+          let carts1 = res;
+          carts1.forEach((item: any) => {
+            products.push(item.product);
+          })
+          this.products = products
+          console.log(this.products)
+
+          let id: number[] = [];
+          let carts2 = this.products;
+          carts2.forEach((item: any) => {
+            id.push(item.id);
+          })
+          this.idP = id;
+          console.log(this.idP)
         }
+        let id: number[] = [];
+        let carts3 = res;
+        carts3.forEach((item: any) => {
+          id.push(item.id);
+        })
+        this.idC = id;
+        console.log(this.idC)
       })
       .catch((error) => {
         console.log("loi")
@@ -94,4 +117,9 @@ export class CartComponent implements OnInit {
     });
   }
 
+  buyProduct() {
+    this.router.navigate(['buy-product'],{
+      queryParams: {data:this.idP,data1:this.idC}
+    })
+  }
 }

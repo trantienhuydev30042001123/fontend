@@ -5,6 +5,8 @@
 .table-cart {
   overflow: hidden;
   margin: 0;
+  max-height: 400px;
+  overflow-y: scroll ;
 }
 .center img{
   text-decoration: none;
@@ -61,4 +63,11 @@ tr{
 }
 .oder{
   margin: 20px;
+}
+.card1{
+  margin: 25px;
+  padding: 25px;
+  height: 400px;
+  border: black groove;
+  border-radius: 5px;
 }

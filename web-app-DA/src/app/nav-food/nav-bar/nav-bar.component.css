@@ -21,6 +21,8 @@
 }
 .login{
   margin-right: 80px;
+  border: 1px solid white;
+  border-radius: 8px;
 }
 .signin{
 
@@ -40,4 +42,17 @@
 }
 .logo-category{
   margin-right: 10px;
+}
+.user{
+  display: flex;
+}
+.userIcon{
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+}
+.userIcon p {
+  padding: 0;
+  margin: 0;
 }

@@ -1,0 +1,94 @@
+.example-full-width {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field .mat-input-element {
+  color: black;
+}
+::ng-deep .mat-form-field .mat-form-field-label {
+  color: black!important;
+}
+::ng-deep .mat-form-field .mat-form-field-underline {
+  background-color: black;
+}
+::ng-deep .mat-form-field .mat-form-field-ripple {
+  background-color: black;
+}
+::ng-deep .mat-form-field .mat-form-field-required-marker {
+  color: black;
+}
+
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #4da0ff!important;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #4da0ff;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-required-marker {
+  color: #4da0ff;
+}
+::ng-deep .mat-form-field.mat-focused .mat-input-element {
+  color: #4da0ff;
+}
+
+
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-input-element {
+  color: black;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: black!important;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+  color: black;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+  background-color: black;
+}
+
+
+.nameP{
+  width: 30%;
+  text-align: left;
+}
+.imageP{
+  width: 18%;
+}
+.imageP img{
+  height: 100%;
+  width: 100%;
+}
+.order{
+  padding: 30px;
+  border-right: 1px solid black;
+}
+th,td {
+  text-align: center;
+}
+td{
+  vertical-align: middle;
+}
+table tbody {
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+table thead, table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.total{
+  float: right ;
+  padding-right: 35px;
+  padding-top: 20px;
+}
+.order1{
+  margin-bottom: 40px;
+}
+/*.p-total{*/
+/*  border: 1px solid black;*/
+/*  border-radius: 8px;*/
+/*}*/
