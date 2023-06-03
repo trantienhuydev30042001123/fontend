@@ -2,9 +2,9 @@
 <div>
   <h1 class="title">Các sản phẩm nổi bật</h1>
 </div>
-  <div class="container1 mt-3" fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="16px">
+  <div class="container1 mt-3">
     <mat-grid-list class="view-project" cols="5" rowHeight="2:3" gutterSize="5">
-      <mat-grid-tile *ngFor="let p of productR" class="grid-tile" fxFlex="20%">
+      <mat-grid-tile *ngFor="let p of productR" class="grid-tile" >
         <div class="row home-page-product-image">
           <div class="product-image">
             <img src="{{p.image}}">
