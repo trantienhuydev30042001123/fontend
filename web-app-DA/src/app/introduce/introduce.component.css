@@ -1,3 +1,6 @@
+.container1 {
+  overflow-x: hidden;
+}
 .product-about{
   height: 530px;
   overflow-y: scroll;
@@ -12,6 +15,7 @@
 }
 .image{
   width: 71%;
+
 }
 .product-detail{
   margin-top: 20px;
@@ -22,4 +26,27 @@
 }
 .product-details1{
   margin: 5px auto 10px;
+}
+h4{
+  font-weight: 600;
+}
+.product-details{
+  margin: 0 auto;
+  display: flex;
+  /* margin: 0 auto; */
+  justify-content: center;
+  align-items: center;
+
+}
+
+@media screen and (max-width: 767px){
+  .product-details{
+    display: none;
+  }
+  .product-about {
+    width: 100%;
+  }
+  .product-details1 {
+    width: 70%;
+  }
 }

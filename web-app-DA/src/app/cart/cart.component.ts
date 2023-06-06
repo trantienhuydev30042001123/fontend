@@ -7,7 +7,8 @@ import {productDTO} from "../dto/ProductDTO";
 import {DialogConfirmComponent} from "../dialog-confirm/dialog-confirm.component";
 import {DialogConfirm} from "../dialog-confirm/interfaces/DialogConfirm";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-
+import { NgZone } from '@angular/core';
+import { NavBarComponent } from '../nav-food/nav-bar/nav-bar.component';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -20,20 +21,30 @@ export class CartComponent implements OnInit {
   cart: cartDTO[] = [];
   product: productDTO[];
   p: number = 1;
+  cong: number = 1;
+  tru: number = -1;
   totalMoney: number;
   idC: number[];
   idP: number[];
   products: any[];
+  userData: any;
+  navBar: NavBarComponent;
 
 
   ngOnInit(): void {
+    const userString = localStorage.getItem('ID_Key');
+    if (userString) {
+      this.userData = JSON.parse(userString);
+    }
     this.getListCart();
+
   }
 
   constructor(private tokenService: TokenService,
               private router: Router,
               private helperService: HelperService,
               private dialog: MatDialog,
+              private zone: NgZone
   ) {
   }
 
@@ -42,8 +53,8 @@ export class CartComponent implements OnInit {
   // }
   public getListCart(): void {
     this.helperService
-      .getAll(
-        "cart"
+      .getListCart(
+        "cart",this.userData
       )
       .then((res: any) => {
         this.cart = res;
@@ -72,7 +83,6 @@ export class CartComponent implements OnInit {
             products.push(item.product);
           })
           this.products = products
-          console.log(this.products)
 
           let id: number[] = [];
           let carts2 = this.products;
@@ -80,7 +90,6 @@ export class CartComponent implements OnInit {
             id.push(item.id);
           })
           this.idP = id;
-          console.log(this.idP)
         }
         let id: number[] = [];
         let carts3 = res;
@@ -88,7 +97,7 @@ export class CartComponent implements OnInit {
           id.push(item.id);
         })
         this.idC = id;
-        console.log(this.idC)
+        console.log(res)
       })
       .catch((error) => {
         console.log("loi")
@@ -108,7 +117,10 @@ export class CartComponent implements OnInit {
           .deleteById("cart", ids)
           .then(() => {
             let mess = "Xoá Thành Công!";
-            this.getListCart();
+            setTimeout(() => {
+              this.getListCart();
+              this.navBar.getListCart();
+            }, 5); // Đợi 100ms trước khi gọi lại getListCart()
           })
           .catch((error) => {
             console.log(error)
@@ -120,6 +132,23 @@ export class CartComponent implements OnInit {
   buyProduct() {
     this.router.navigate(['buy-product'],{
       queryParams: {data:this.idP,data1:this.idC}
+    })
+  }
+
+  public updateQuantityCong(id: number): void {
+    this.helperService.update( "cart/update",id,this.cong)
+      .then(() => {
+        this.getListCart();
+      }).catch(() => {
+      console.log("loi")
+    })
+  }
+  public updateQuantityTru(id: number): void {
+    this.helperService.update( "cart/update",id,this.tru)
+      .then(() => {
+        this.getListCart();
+      }).catch(() => {
+      console.log("loi")
     })
   }
 }

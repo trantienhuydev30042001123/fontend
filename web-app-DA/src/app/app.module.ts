@@ -92,7 +92,7 @@ const appRoutes: Routes = [
         NgxStarRatingModule,
         RatingModule,
         NgxPaginationModule,
-        FlexLayoutModule
+        FlexLayoutModule,
     ],
   providers: []
 })

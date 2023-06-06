@@ -22,7 +22,7 @@
               <td class="nameP">{{p.nameP}}</td>
               <td class="imageP"><img src="{{p.imageP}}"></td>
               <td>{{p.priceP}}đ</td>
-              <td>{{p.quantity}}</td>
+              <td><div class="item-count"><button class="counter-btn increment" (click)="updateQuantityTru(p.id)" >-</button>{{p.quantity}}<button class="counter-btn decrement" (click)="updateQuantityCong(p.id)">+</button></div></td>
               <td>
                 <button class="btn btn-danger" (click)="deleteCart(p.id)">
                   <mat-icon>delete</mat-icon>
@@ -40,11 +40,10 @@
     </div>
   </div>
 </ng-container>
-<ng-container *ngIf="cart.length == 0">
-  <div class="container">
+<ng-container *ngIf="cart.length == 0 or cart == null ">
+  <div class="container cart-empty">
     <div class="card1">
-      <h2 class="card-title"> Giỏ hàng</h2>
-    </div>
+
     <div class="center">
       <img
         src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
@@ -52,6 +51,7 @@
       <h2>Giỏ hàng của bạn hện tại đang trống!</h2>
       <h4>Vui lòng thêm sản phẩm vào giỏ hàng!</h4>
       <button routerLink="/home" class="btn btn-primary">Trang sản phẩm</button>
+    </div>
     </div>
   </div>
 </ng-container>

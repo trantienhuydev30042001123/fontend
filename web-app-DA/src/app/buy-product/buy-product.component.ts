@@ -20,6 +20,7 @@ export class BuyProductComponent implements OnInit{
   totalMoney: number;
   products: any[];
   idC: number[];
+  userData: any;
   order: order = {
     fullname:'',
     address:'',
@@ -27,6 +28,10 @@ export class BuyProductComponent implements OnInit{
     producId: []
   };
   ngOnInit(): void {
+    const userString = localStorage.getItem('ID_Key');
+    if (userString) {
+      this.userData = JSON.parse(userString);
+    }
     this.router.queryParams.subscribe((params: any) => {
       this.abc = params.data
       this.idC = params.data1
@@ -40,8 +45,8 @@ export class BuyProductComponent implements OnInit{
   }
   public getListCart(): void {
     this.helperService
-      .getAll(
-        "cart"
+      .getListCart(
+        "cart", this.userData
       )
       .then((res: any) => {
         this.cart = res;

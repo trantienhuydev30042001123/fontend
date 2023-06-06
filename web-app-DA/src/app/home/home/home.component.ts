@@ -52,10 +52,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.router.queryParams.subscribe((params: any) => {
       this.userId = params.data
     });
-    this.getUser();
+    // this.getUser();
     if (this.autoSlide) {
       this.autoSlideImage();
     }
@@ -79,16 +80,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public getUser(): void {
-    this.helperService
-      .findInfoByIdN(
-        "account", this.userId
-      )
-      .then((res: any) => {
-        this.user = res;
-      })
-      .catch((error) => {
-        console.log("loi")
-      })
-  }
+  // public getUser(): void {
+  //   this.helperService
+  //     .findInfoByIdN(
+  //       "account", this.userId
+  //     )
+  //     .then((res: any) => {
+  //       this.user = res;
+  //     })
+  //     .catch((error) => {
+  //       console.log("loi")
+  //     })
+  // }
 }

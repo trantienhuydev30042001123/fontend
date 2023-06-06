@@ -14,6 +14,7 @@ export class LoginComponent {
   hide = true;
   signIn: SignIn;
   form: any = {};
+  
 
   constructor(private authService: AuthService,
               private tokenService: TokenService,
@@ -21,19 +22,25 @@ export class LoginComponent {
   }
   ngOnInit(): void{}
   ngSubmit() {
+    this.login();
+  }
+  login(): void {
     this.signIn = new SignIn(
       this.form.username,
       this.form.password
-    )
-    this.authService.signIn(this.signIn).subscribe( data=>{
-      if (data.token!=undefined){
+    );
+
+    this.authService.signIn(this.signIn).subscribe(data => {
+      if (data.token != undefined) {
         this.tokenService.setToken(data.token);
         this.tokenService.setName(data.name);
         this.tokenService.setRole(data.roles);
-        this.router.navigate(['home'],{
-          queryParams: {data:data.id}
-        })
+        this.tokenService.setId(data.id);
+        this.authService.setLoggedIn(true); // Đánh dấu là đã đăng nhập
+        this.router.navigate(['home'], {
+          queryParams: { data: data.id }
+        });
       }
-    })
+    });
   }
 }

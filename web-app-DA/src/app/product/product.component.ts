@@ -26,6 +26,7 @@ export class ProductComponent implements OnInit {
   searchKeyword = "";
   startprice : number = 0;
   endprice : number = 0;
+
   constructor(private helperService: HelperService,
               private dialog: MatDialog,
               private router: Router,

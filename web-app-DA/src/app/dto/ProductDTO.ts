@@ -1,5 +1,6 @@
 import {categoryDTO} from "./categoryDTO";
 import {ratingDTO} from "./ratingDTO";
+import { sizeDTO } from "./sizeDTO";
 
 export class productDTO {
   id: string;
@@ -16,6 +17,7 @@ export class productDTO {
   star:number;
   category: categoryDTO[];
   rating: ratingDTO[];
+  sizes: sizeDTO[];
 
   // constructor(product = null) {
   //   if (product !== null) {

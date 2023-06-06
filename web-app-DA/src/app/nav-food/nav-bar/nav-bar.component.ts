@@ -3,41 +3,54 @@ import {TokenService} from "../../service/token.service";
 import {Router} from "@angular/router";
 import {HelperService} from "../../service/helper-service";
 import {productDTO} from "../../dto/ProductDTO";
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit{
-  carId : number;
- totalItem : number = 0;
+export class NavBarComponent implements OnInit {
+  carId: number;
+  totalItem: number = 0;
   name: string | null;
   checkLogin = false;
+  userData: any;
+  userData1: any;
 
   constructor(private tokenService: TokenService,
               private router: Router,
               private helperService: HelperService,
-              ) {
+              private cartService: CartService
+  ) {
   }
 
   ngOnInit(): void {
-    this.getListCart();
-    if (this.tokenService.getToken()){
+    const userString = localStorage.getItem('ID_Key');
+    if (userString) {
+      this.userData1 = JSON.parse(userString);
+    }
+    this.cartService.cartUpdated$.subscribe(() => {
+      this.getListCart();
+    });
+    if (this.tokenService.getToken()) {
       this.checkLogin = true;
       this.name = this.tokenService.getName()
     }
+    this.getListCart()
   }
+
   // ngDoCheck(): void {
   //
   // }
   ngOnChanges(changes: SimpleChanges): void {
 
   }
+
   public getListCart(): void {
     this.helperService
-      .getAll(
-        "cart"
+      .getListCart(
+        "cart",this.userData1
       )
       .then((res: any) => {
         this.totalItem = res.length;
@@ -46,15 +59,27 @@ export class NavBarComponent implements OnInit{
         console.log("loi")
       })
   }
-  logOut(){
+
+  logOut() {
     this.tokenService.logOut();
-    this.router.navigate(['home']).then(()=> {
+    this.router.navigate(['home']).then(() => {
       window.location.reload();
+    });
+  }
+
+  public getCategory(number: number): void {
+    this.router.navigate(['Category'], {
+      queryParams: {data: this.carId}
     })
   }
-  public getCategory(number: number): void {
-        this.router.navigate(['Category'],{
-          queryParams: {data:this.carId}
-        })
+
+  profile() {
+    const userString = localStorage.getItem('ID_Key');
+    if (userString) {
+      this.userData = JSON.parse(userString);
+    }
+    this.router.navigate(['profile'], {
+      queryParams: {data: this.userData}
+    })
   }
 }

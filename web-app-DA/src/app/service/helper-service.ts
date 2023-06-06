@@ -32,6 +32,14 @@ export class HelperService {
         }, reject);
     });
   }
+  public getListCart( apiURL : string, userId: string) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.baseURL + apiURL + "/" + userId , this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
   public findInfoById(apiURL: string, id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.baseURL + apiURL + "/" + id, this.httpOptions)
@@ -56,9 +64,18 @@ export class HelperService {
         }, reject);
     });
   }
-  public add( apiURL: string, id: string): Promise<any> {
+  public add( apiURL: string, id: string, userId: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.httpClient.post(this.baseURL + apiURL + "/" + id, this.httpOptions)
+      this.httpClient.post(this.baseURL + apiURL + "/" + id + "/" + userId, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+  public update( apiURL: string, id:number,quantity:number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient
+        .post<any>(this.baseURL + apiURL + "/" + id + "/" + quantity, this.httpOptions)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);

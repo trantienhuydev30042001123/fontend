@@ -10,6 +10,7 @@ import {JwtResponse} from "../model/jwtResponse";
   providedIn: 'root'
 })
 export class AuthService {
+  private loggedIn: boolean = true;
   private API_SIGNUP = environment.API_LOCAL + '/signup';
   private API_SIGNIN = environment.API_LOCAL + '/signin';
   constructor(private http: HttpClient) {
@@ -17,7 +18,15 @@ export class AuthService {
   signUp(signUp : SignUp): Observable<any>{
     return  this.http.post<any>(this.API_SIGNUP, signUp);
   }
-  signIn(signIn: SignIn): Observable<JwtResponse>{
-    return this.http.post<JwtResponse>(this.API_SIGNIN,signIn);
+  signIn(signIn: SignIn): Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(this.API_SIGNIN, signIn);
+  }
+
+  setLoggedIn(value: boolean): void {
+    this.loggedIn = value;
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
   }
 }
