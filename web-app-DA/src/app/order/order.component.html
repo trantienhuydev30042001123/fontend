@@ -1,0 +1,37 @@
+<app-nav-bar></app-nav-bar>
+<ng-container >
+  <div class="container">
+    <div class="card">
+      <h2 class="card-title"> Đơn hàng</h2>
+      <div class="card-table">
+        <div class="cart-product">
+          <table class="table table-responsive table-cart">
+            <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên sản phẩm</th>
+              <th>Hình ảnh sản phẩm</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let p of order,let i= index ">
+              <td>{{i + 1}}</td>
+              <td class="nameP">{{p.fullname}}</td>
+<!--              <td class="imageP"><img src="{{p.createDate}}"></td>-->
+              <td>{{p.address}}đ</td>
+<!--              <td>{{p.quantity}}</td>-->
+            </tr>
+            </tbody>
+          </table>
+        </div>
+<!--        <div class="oder" align="right">-->
+<!--          <h4>Tổng tiền : {{totalMoney}} VNĐ</h4>-->
+<!--          <button (click)="buyProduct()" mat-raised-button color="warn">Đặt mua</button>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+</ng-container>
+<app-footer></app-footer>

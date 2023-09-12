@@ -20,23 +20,33 @@ export class BuyProductComponent implements OnInit{
   totalMoney: number;
   products: any[];
   idC: number[];
+  quantity: number[];
+  prices: number[];
   userData: any;
   order: order = {
     fullname:'',
     address:'',
     sdt:'',
-    producId: []
+    producId: [],
+    totalMoney: 0,
+    quantity:[],
+    price:[],
+    userId: 0
   };
+
+
   ngOnInit(): void {
     const userString = localStorage.getItem('ID_Key');
     if (userString) {
       this.userData = JSON.parse(userString);
+      this.order.userId = this.userData;
     }
     this.router.queryParams.subscribe((params: any) => {
       this.abc = params.data
       this.idC = params.data1
       this.order.producId = this.abc;
     });
+
     this.getListCart();
   }
   constructor(
@@ -52,6 +62,8 @@ export class BuyProductComponent implements OnInit{
         this.cart = res;
         if (res) {
           for (let a of res) {
+            let quantities: number[] = [];
+            let prices: number[] = [];
             if (a.product) {
               const name = a.product;
               a.nameP = name.name;
@@ -59,14 +71,26 @@ export class BuyProductComponent implements OnInit{
               a.imageP = image.image;
               const lastPrice = a.product;
               a.priceP = (lastPrice.price - (lastPrice.price * lastPrice.discount / 100)) * a.quantity;
-
+              a.price = (lastPrice.price - (lastPrice.price * lastPrice.discount / 100));
+              let carts2 = res;
+              carts2.forEach((item: any) => {
+                quantities.push(item.quantity);
+              })
               let total = 0;
               let carts = res;
               carts.forEach((item: any) => {
                 total += item.priceP;
               })
+              let carts3 = res;
+              carts3.forEach((item: any) => {
+                prices.push(item.price);
+              })
+
               this.currencyPipe.transform(total, 'VND', 'symbol', '1.0-0');
               this.totalMoney = total;
+              this.order.totalMoney = total;
+              this.order.quantity = quantities;
+              this.order.price = prices;
 
             }
           }

@@ -36,6 +36,7 @@ import {DialogConfirmComponent} from "./dialog-confirm/dialog-confirm.component"
 import { ProfileComponent } from './profile/profile.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { OrderComponent } from './order/order.component';
 
 const appRoutes: Routes = [
   {path:'',redirectTo:'home', pathMatch:"full"},
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
   {path:'Category', component:ProductCategoryComponent},
   {path:'profile', component:ProfileComponent},
   {path:'buy-product', component:BuyProductComponent},
+  {path:'order', component:OrderComponent},
 ];
 @NgModule({
   bootstrap: [AppComponent],
@@ -67,7 +69,8 @@ const appRoutes: Routes = [
     ProductCategoryComponent,
     DialogConfirmComponent,
     ProfileComponent,
-    BuyProductComponent
+    BuyProductComponent,
+    OrderComponent
   ],
     imports: [
         HttpClientModule,

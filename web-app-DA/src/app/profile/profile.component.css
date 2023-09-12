@@ -1,0 +1,41 @@
+.info__user-page {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 40px;
+}
+
+.info__user-page button {
+  text-align: center;
+}
+
+.info__user-page ul {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  margin: auto;
+  width: 40%;
+}
+
+.info__user-page li .textbox {
+  padding: 0px 8px;
+  border: none;
+  resize: none;
+  width: 100%;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.info__user-page li:hover .textbox {
+  border-bottom: 1px solid #0dcaf0;
+}
+.info__user-img img{
+  border-radius: 50%;
+  width: 150px;
+  margin-top: 30px;
+}
+.icon{
+  color: aqua;
+  /*font-size: 100px;*/
+}

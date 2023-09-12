@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { userDTO } from '../dto/userDTO';
 import { HelperService } from '../service/helper-service';
 
@@ -11,10 +11,11 @@ import { HelperService } from '../service/helper-service';
 export class ProfileComponent implements OnInit {
   userData: any;
   UserId : number;
-  user : userDTO;
-  
+  user : userDTO[] = [];
+
   constructor(private helperService: HelperService,
-              private router: ActivatedRoute) {
+              private router: ActivatedRoute,
+              private router1: Router,) {
   }
 
   ngOnInit(): void {
@@ -36,5 +37,10 @@ export class ProfileComponent implements OnInit {
       .catch((error) => {
         console.log("loi")
       })
+  }
+
+  public order(): void {
+    this.router1.navigate(['order'], {
+    })
   }
 }

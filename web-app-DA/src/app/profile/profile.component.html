@@ -1,27 +1,42 @@
-<!--<div class="info__user-page" *="let p of user">-->
-<!--  <div class="info__user-img">-->
-<!--    <img src="{{p.avatar}}">-->
-<!--    <i id="change-avata" title="Thay đổi ảnh đại diện" class="fa-light fa-camera"></i>-->
-<!--  </div>-->
-<!--  <h1>-->
-<!--    {{p.name}}-->
-<!--  </h1>-->
-<!--  <form method="post" enctype="multipart/form-data" style="width: 100%;">-->
-<!--    <section style="width: 100%;">-->
-<!--      <ul>-->
-<!--        <li><label >Họ và tên:</label><input class="textbox" name="name" value="{{p.name}}">-->
-<!--        </li>-->
-<!--        <li><label></label>Số điện thoại:<input class="textbox" type="tel" name="mobile" value="{{p.name}}">-->
-<!--        </li>-->
-<!--        <li><label></label>Địa chỉ:<input class="textbox" name="address" rows="1" value="{{p.name}}">-->
-<!--        </li>-->
-<!--        <li><label></label>Email:<input class="textbox" type="email" name="email" value="{{p.name}}"></li>-->
-<!--        <input hidden class="textbox" name="username" value="{{p.name}}">-->
-<!--      </ul>-->
-<!--      <input class="btn btn-sm btn-info btn-signup" style="background-color: #0dcaf0; color:#fff" type="submit" value="Cập nhật lại thông tin">-->
-<!--    </section>-->
-<!--  </form>-->
-<!--</div>-->
+<div *ngFor="let p of user" class="info__user-page" >
+  <div class="info__user-img">
+    <img src="{{p.avatar}}">
+  </div>
+  <h1>
+    {{p.name}}
+  </h1>
+  <div class="info__userhome">
+    <div class="info__user-boxcontent">
+      <div class="info__user-boxcontent-item">
+        <span>Ngày tham gia</span>
+        <mat-icon class = "icon">pending_actions</mat-icon>
+      </div>
+      <div class="info__user-boxcontent-item">
+        <span>Đơn hàng của bạn</span>
+        <mat-icon class = "icon" (click)="order()">production_quantity_limits</mat-icon>
+      </div>
+      <div class="info__user-boxcontent-item">
+        <span>Số tiền đã mua</span>
+        <mat-icon class = "icon">monetization_on</mat-icon>
+      </div>
+    </div>
+  </div>
+  <form method="post" enctype="multipart/form-data" style="width: 100%;">
+    <section style="width: 100%;">
+      <ul>
+        <li><label >Họ và tên:</label><input class="textbox" name="name" value="{{p.name}}">
+        </li>
+        <li><label></label>Số điện thoại:<input class="textbox" type="tel" name="mobile" value="{{p.name}}">
+        </li>
+        <li><label></label>Địa chỉ:<input class="textbox" name="address" rows="1" value="{{p.name}}">
+        </li>
+        <li><label></label>Email:<input class="textbox" type="email" name="email" value="{{p.name}}"></li>
+        <input hidden class="textbox" name="username" value="{{p.name}}">
+      </ul>
+      <button mat-raised-button color="primary" style="margin-bottom: 20px" >Cập nhật lại thông tin</button>
+    </section>
+  </form>
+</div>
 <!--<div class="container">-->
 <!--  <div class="col">-->
 <!--    <div class="info__user-img">-->
