@@ -49,7 +49,7 @@
 
 
 .nameP{
-  width: 30%;
+  width:20%;
   text-align: left;
 }
 .imageP{
@@ -69,6 +69,7 @@ th,td {
 td{
   vertical-align: middle;
 }
+
 table tbody {
   display: block;
   max-height: 300px;

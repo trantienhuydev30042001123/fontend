@@ -5,11 +5,15 @@ import {orderDetailsDTO} from "./orderDetailsDTO";
 export class orderDTO {
   id:number;
   fullname:string;
-  createDate:string;
+  sizes: number[];
+  createdDate:string;
   address:string;
   sdt:string;
   orderDetail: orderDetailsDTO[];
   status:number;
-  nameProduct: string[];
-
+  nameProducts: string[];
+  images: string[];
+  prices: number[];
+  quantity: number[];
+  
 }

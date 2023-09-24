@@ -107,3 +107,27 @@ position: absolute;
   }
 
 }
+
+.sizes{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sizes>div{
+  display: flex;
+  gap: 8px;
+}
+
+
+
+.size{
+  cursor: pointer;
+  border: 2px solid gray;
+  width: fit-content;
+  padding: 2px;
+}
+
+.selected {
+  background-color: burlywood;
+}

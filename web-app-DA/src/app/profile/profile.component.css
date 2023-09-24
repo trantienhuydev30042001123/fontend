@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 40px;
 }
 
 .info__user-page button {
@@ -34,8 +33,28 @@
   border-radius: 50%;
   width: 150px;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 .icon{
-  color: aqua;
-  /*font-size: 100px;*/
+  color: aquamarine;
+  /*margin-bottom: 20px;*/
+  margin: 30px;
+}
+.info__user-boxcontent {
+  display: flex;
+  justify-content: space-between;
+}
+.icon-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.icon-text-container .icon {
+  font-size: 80px;
+}
+.mat-icon {
+
+  height: 80px !important;
+  width: 80px !important;
 }

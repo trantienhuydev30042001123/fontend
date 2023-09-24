@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { userDTO } from '../dto/userDTO';
 import { HelperService } from '../service/helper-service';
+import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private helperService: HelperService,
               private router: ActivatedRoute,
-              private router1: Router,) {
+              private router1: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -43,4 +46,19 @@ export class ProfileComponent implements OnInit {
     this.router1.navigate(['order'], {
     })
   }
+
+  openDialog(){
+    this.dialog
+      .open(ProfileUpdateComponent, {
+        data: this.UserId,
+        autoFocus: false,
+      })
+      .afterClosed()
+      .subscribe((mess) => {
+        if (mess) {
+          this.getUser();
+        }
+      });
+  }
+ 
 }

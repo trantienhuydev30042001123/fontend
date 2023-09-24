@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HelperService} from "../service/helper-service";
 import {preloadAndParseTemplate} from "@angular/compiler-cli/src/ngtsc/annotations/component/src/resources";
 import {ProductViewDetailsComponent} from "../product-view-details/product-view-details.component";
+import { categoryDTO } from '../dto/categoryDTO';
 
 @Component({
   selector: 'app-product-category',
@@ -16,6 +17,9 @@ import {ProductViewDetailsComponent} from "../product-view-details/product-view-
 })
 export class ProductCategoryComponent implements OnInit{
   product: productDTO[] = [];
+  category: categoryDTO[] = [];
+
+  nameCategory : string;
   p: number = 1;
   categoryId : number;
   constructor(private router: ActivatedRoute,
@@ -26,6 +30,7 @@ export class ProductCategoryComponent implements OnInit{
       this.router.queryParams.subscribe((params :any) =>{
         this.categoryId = params.data
         this.getListProductByCategory()
+        this.getCategory();
       });
   }
   // ngDoCheck() {
@@ -62,6 +67,19 @@ export class ProductCategoryComponent implements OnInit{
         console.log("loi")
       })
   }
+  public getCategory(): void {
+    this.helperService
+      .findInfoByIdN(
+        "category",this.categoryId
+      )
+      .then((res: any) => {
+        this.nameCategory = res.name;
+      })
+      .catch((error) => {
+        console.log("loi")
+      })
+  }
+
   showProductDetails(id: string) {
     this.dialog
       .open(ProductViewDetailsComponent, {
@@ -72,5 +90,7 @@ export class ProductCategoryComponent implements OnInit{
       .subscribe((mess) => {
       });
   }
-
+  formatPrice(price: number): string {
+    return price.toLocaleString('vi-VN');
+  }
 }

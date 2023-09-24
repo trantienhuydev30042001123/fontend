@@ -11,6 +11,7 @@
               <th>STT</th>
               <th>Tên sản phẩm</th>
               <th>Hình ảnh sản phẩm</th>
+              <th>Size</th>
               <th>Giá</th>
               <th>Số lượng</th>
               <th>Thao tác</th>
@@ -21,8 +22,10 @@
               <td>{{i + 1}}</td>
               <td class="nameP">{{p.nameP}}</td>
               <td class="imageP"><img src="{{p.imageP}}"></td>
-              <td>{{p.priceP}}đ</td>
-              <td><div class="item-count"><button class="counter-btn increment" (click)="updateQuantityTru(p.id)" >-</button>{{p.quantity}}<button class="counter-btn decrement" (click)="updateQuantityCong(p.id)">+</button></div></td>
+              <td *ngIf="p.size != 0">{{p.size}}</td>
+              <td *ngIf="p.size == 0">freesize</td>
+              <td>{{formatPrice(p.priceP)}}đ</td>
+              <td><div class="item-count"><button class="counter-btn increment"  (click)="updateQuantityTru(p.id)" >-</button>{{p.quantity}}<button class="counter-btn decrement" (click)="updateQuantityCong(p.id)">+</button></div></td>
               <td>
                 <button class="btn btn-danger" (click)="deleteCart(p.id)">
                   <mat-icon>delete</mat-icon>
@@ -33,7 +36,7 @@
           </table>
         </div>
         <div class="oder" align="right">
-          <h4>Tổng tiền : {{totalMoney}} VNĐ</h4>
+          <h4>Tổng tiền : {{formatPrice(totalMoney)}} VNĐ</h4>
           <button (click)="buyProduct()" mat-raised-button color="warn">Đặt mua</button>
         </div>
       </div>

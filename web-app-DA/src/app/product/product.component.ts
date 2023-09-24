@@ -26,6 +26,7 @@ export class ProductComponent implements OnInit {
   searchKeyword = "";
   startprice : number = 0;
   endprice : number = 0;
+  slideIndex = 0;
 
   constructor(private helperService: HelperService,
               private dialog: MatDialog,
@@ -108,4 +109,8 @@ export class ProductComponent implements OnInit {
       .subscribe((mess) => {
       });
   }
+  formatPrice(price: number): string {
+    return price.toLocaleString('vi-VN');
+  }
+
 }

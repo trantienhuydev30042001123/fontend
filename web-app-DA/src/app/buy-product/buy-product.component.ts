@@ -5,34 +5,44 @@ import {order} from "./interface/order";
 import {ActivatedRoute} from "@angular/router";
 import {HelperService} from "../service/helper-service";
 import {cartDTO} from "../dto/cartDTO";
-import { CurrencyPipe } from '@angular/common';
+import {CurrencyPipe} from '@angular/common';
 import {CartComponent} from "../cart/cart.component";
+import {MatDialog} from '@angular/material/dialog';
+import {BuyProductSuccessDialogComponent} from './buy-product-success-dialog/buy-product-success-dialog.component';
+import {HttpClient} from '@angular/common/http';
+import { NavBarComponent } from '../nav-food/nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-buy-product',
   templateUrl: './buy-product.component.html',
   styleUrls: ['./buy-product.component.css']
 })
-export class BuyProductComponent implements OnInit{
+export class BuyProductComponent implements OnInit {
   currencyPipe: CurrencyPipe = new CurrencyPipe('en-US');
   abc: number[];
   cart: cartDTO[] = [];
+  totalItem: number = 0;
   totalMoney: number;
   products: any[];
   idC: number[];
+  sizeP: number[];
   quantity: number[];
   prices: number[];
   userData: any;
+  isSuccess: boolean = false;
   order: order = {
-    fullname:'',
-    address:'',
-    sdt:'',
+    fullname: '',
+    address: '',
+    sdt: '',
     producId: [],
     totalMoney: 0,
-    quantity:[],
-    price:[],
-    userId: 0
+    quantity: [],
+    price: [],
+    userId: 0,
+    size: [],
   };
+
+  navBarComponent : NavBarComponent;
 
 
   ngOnInit(): void {
@@ -44,15 +54,24 @@ export class BuyProductComponent implements OnInit{
     this.router.queryParams.subscribe((params: any) => {
       this.abc = params.data
       this.idC = params.data1
+      this.sizeP = params.data2
       this.order.producId = this.abc;
+      this.order.size = this.sizeP;
     });
 
     this.getListCart();
   }
+
   constructor(
     private helperService: HelperService,
-    private router: ActivatedRoute) {
+    private router: ActivatedRoute,
+    private dialog: MatDialog,
+    private http: HttpClient,
+    // private na : NavBarComponent
+
+  ) {
   }
+
   public getListCart(): void {
     this.helperService
       .getListCart(
@@ -60,6 +79,7 @@ export class BuyProductComponent implements OnInit{
       )
       .then((res: any) => {
         this.cart = res;
+        this.totalItem = res.length;
         if (res) {
           for (let a of res) {
             let quantities: number[] = [];
@@ -91,7 +111,7 @@ export class BuyProductComponent implements OnInit{
               this.order.totalMoney = total;
               this.order.quantity = quantities;
               this.order.price = prices;
-
+              // this.order.size = res.size;
             }
           }
           let products: any[] = [];
@@ -100,29 +120,49 @@ export class BuyProductComponent implements OnInit{
             products.push(item.product);
           })
           this.products = products
-          console.log(this.products)
         }
+        console.log("respon:" + this.cart);
       })
       .catch((error) => {
         console.log("loi")
       })
   }
-  public placeOrder(orderForm: NgForm){
+
+  public placeOrder(orderForm: NgForm) {
     this.helperService
       .oder(
         "order/placeOrder", this.order
       )
       .then((res: any) => {
-          orderForm.reset();
+        orderForm.reset();
+        this.helperService
+          .getListCart(
+            "cart",this.userData
+          )
+        this.dialog.open(BuyProductSuccessDialogComponent,{
+          panelClass: 'dialog',
+          data: {
+            isSuccess : true
+          }
+        });
+        this.totalMoney = 0;
       })
       .catch((error) => {
         console.log("loi")
+        this.dialog.open(BuyProductSuccessDialogComponent,{
+          panelClass: 'dialog',
+          data: {
+            isSuccess : false
+          }
+        });
       })
   }
-  public abcd(orderForm: NgForm){
+
+  public abcd(orderForm: NgForm) {
     this.placeOrder(orderForm);
-    this.deleteAllCart()
+    this.deleteAllCart();
   }
+
   public deleteAllCart(): void {
     this.helperService
       .deleteAll("cart", this.idC)
@@ -135,4 +175,31 @@ export class BuyProductComponent implements OnInit{
       })
   }
 
+  // public placeOrderSuccess() {
+  //   this.http.post("", this.order).subscribe(
+  //     (response) => {
+  //       // Kiểm tra xem mã trạng thái của phản hồi là 200 (OK)
+  //       if (response.status === 200) {
+  //         this.isSuccess = true
+  //       } else {
+  //         this.isSuccess = false
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Lỗi khi gửi yêu cầu:', error);
+  //       this.isSuccess = false
+  //     }
+  //   );
+  //
+  //   this.dialog.open(BuyProductSuccessDialogComponent,{
+  //     panelClass: 'dialog',
+  //     data: {
+  //       isSuccess : this.isSuccess
+  //     }
+  //   });
+  // }
+
+  formatPrice(price: number): string {
+    return price.toLocaleString('vi-VN');
+  }
 }

@@ -17,11 +17,12 @@ export class NavBarComponent implements OnInit {
   checkLogin = false;
   userData: any;
   userData1: any;
+  intervalId: any;
 
   constructor(private tokenService: TokenService,
               private router: Router,
               private helperService: HelperService,
-              private cartService: CartService
+              private cartService: CartService,
   ) {
   }
 
@@ -38,6 +39,18 @@ export class NavBarComponent implements OnInit {
       this.name = this.tokenService.getName()
     }
     this.getListCart()
+
+    // const refreshIntervalSeconds = 0; // Đổi số giây tùy theo tần suất bạn muốn
+    // this.intervalId = setInterval(() => {
+    //   this.getListCart();
+    // }, refreshIntervalSeconds * 1000); // Chuyển đổi thành mili giây
+  }
+
+  ngOnDestroy(): void {
+    // Trước khi component bị hủy, hủy bỏ setInterval để ngừng gọi API
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   // ngDoCheck(): void {

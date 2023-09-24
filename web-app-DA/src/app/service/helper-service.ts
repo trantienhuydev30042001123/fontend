@@ -32,6 +32,14 @@ export class HelperService {
         }, reject);
     });
   }
+  public getList( apiURL : string, userId: string) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.baseURL + apiURL + "/" + userId , this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
   public getListCart( apiURL : string, userId: string) {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.baseURL + apiURL + "/" + userId , this.httpOptions)
@@ -67,6 +75,15 @@ export class HelperService {
   public add( apiURL: string, id: string, userId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.baseURL + apiURL + "/" + id + "/" + userId, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+
+  public addCart( apiURL: string, id: string, userId: string, size: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(this.baseURL + apiURL + "/" + id + "/" + userId + "/" + size, this.httpOptions)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);
@@ -115,6 +132,16 @@ export class HelperService {
   public oder(apiURL: string, order:order,): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.baseURL + apiURL, order, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+
+  public update1(entity: any, apiURL: string, id:string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient
+        .post<any>(this.baseURL + apiURL + "/" + id, entity, this.httpOptions)
         .subscribe((response: any) => {
           resolve(response);
         }, reject);

@@ -24,6 +24,8 @@ export class ProductViewDetailsComponent implements OnInit{
   selectedProductIndex1 = 1;
   selectedProductIndex2 = 2;
   size :sizeDTO[] = [];
+  a: number[];
+  selectedSize: number = 0;
   userData: any;
   navBarComponent: NavBarComponent;
 
@@ -89,10 +91,7 @@ export class ProductViewDetailsComponent implements OnInit{
           this.singleProduct = res;
           const b = res.price - (res.price * res.discount / 100);
           this.singleProduct.lastprice = b;
-          console.log(res.sizes)
-          // res.sizes = this.size;
-          console.log(res)
-          console.log(this.size)
+          this.a = res.sizes.map((size: { size: any; }) => size.size) ;
         }
       })
       .catch((error) => {
@@ -102,7 +101,7 @@ export class ProductViewDetailsComponent implements OnInit{
   addToCart(): void {
     if (this.authService.isLoggedIn()) {
       this.helperService
-        .add("cart", this.id,this.userData)
+        .addCart("cart", this.id,this.userData, this.selectedSize)
         .then((res: any) => {
           this.cartService.updateCart();
         })
@@ -119,5 +118,12 @@ export class ProductViewDetailsComponent implements OnInit{
   }
   close(answer: string) {
     this.dialogRef.close(answer);
+  }
+  selectSize(size: number) {
+    this.selectedSize = size;
+  }
+
+  formatPrice(price: number): string {
+    return price.toLocaleString('vi-VN');
   }
 }

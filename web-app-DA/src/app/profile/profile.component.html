@@ -8,32 +8,40 @@
   <div class="info__userhome">
     <div class="info__user-boxcontent">
       <div class="info__user-boxcontent-item">
-        <span>Ngày tham gia</span>
-        <mat-icon class = "icon">pending_actions</mat-icon>
+        <div class="icon-text-container">
+          <mat-icon class="icon">pending_actions</mat-icon>
+          <span>Ngày tham gia</span>
+        </div>
       </div>
       <div class="info__user-boxcontent-item">
-        <span>Đơn hàng của bạn</span>
-        <mat-icon class = "icon" (click)="order()">production_quantity_limits</mat-icon>
+        <div class="icon-text-container" (click)="order()">
+          <mat-icon class="icon">production_quantity_limits</mat-icon>
+          <span>Đơn hàng của bạn</span>
+        </div>
       </div>
       <div class="info__user-boxcontent-item">
-        <span>Số tiền đã mua</span>
-        <mat-icon class = "icon">monetization_on</mat-icon>
+        <div class="icon-text-container">
+          <mat-icon class="icon">monetization_on</mat-icon>
+          <span>Số tiền đã mua</span>
+        </div>
       </div>
     </div>
   </div>
-  <form method="post" enctype="multipart/form-data" style="width: 100%;">
+  <form method="post" enctype="multipart/form-data" style="width: 100%; margin-top: 40px">
     <section style="width: 100%;">
       <ul>
-        <li><label >Họ và tên:</label><input class="textbox" name="name" value="{{p.name}}">
+        <li><label >Họ và tên:</label><input readonly class="textbox" name="name" value="{{p.name}}">
         </li>
-        <li><label></label>Số điện thoại:<input class="textbox" type="tel" name="mobile" value="{{p.name}}">
+        <li><label></label>Số điện thoại:<input readonly class="textbox" type="tel" name="mobile" value="{{p.name}}">
         </li>
-        <li><label></label>Địa chỉ:<input class="textbox" name="address" rows="1" value="{{p.name}}">
+        <li><label></label>Địa chỉ:<input readonly class="textbox" name="address" rows="1" value="{{p.name}}">
         </li>
-        <li><label></label>Email:<input class="textbox" type="email" name="email" value="{{p.name}}"></li>
+        <li><label></label>Email:<input readonly class="textbox" type="email" name="email" value="{{p.email}}"></li>
         <input hidden class="textbox" name="username" value="{{p.name}}">
       </ul>
-      <button mat-raised-button color="primary" style="margin-bottom: 20px" >Cập nhật lại thông tin</button>
+      <div style="display: flex; justify-content: center; align-items: center;margin-top: 30px">
+        <button mat-raised-button color="primary" style="margin-bottom: 20px;" (click)="openDialog()">Cập nhật lại thông tin</button>
+      </div>
     </section>
   </form>
 </div>

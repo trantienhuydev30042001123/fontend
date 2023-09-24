@@ -6,7 +6,7 @@
   </div>
   <div class="row product-detail ">
     <div class="col-6 product-image ">
-        <img class="product-image-1" src="{{singleProduct.image}}">
+      <img class="product-image-1" src="{{singleProduct.image}}">
       <div class="image-buttom">
         <img class="product-image-2" src="{{singleProduct.image}}">
         <img class="product-image-2" src="{{singleProduct.image2}}">
@@ -23,8 +23,23 @@
           {{singleProduct.description}}
         </div>
         <div class=" product-price mt-4">
-          <p class="product-price-start">{{singleProduct.price}}đ</p>
-          <p><b>{{singleProduct.lastprice}}đ</b></p>
+          Giá: <br>
+          <p class="product-price-start">{{formatPrice(singleProduct.price)}}đ</p>
+          <p><b>{{formatPrice(singleProduct.lastprice)}}đ</b></p>
+        </div>
+
+        <div *ngIf="a.length > 0" class="sizes">
+          Size:
+          <div >
+            <div
+              class="size"
+              *ngFor="let size of a"
+              [ngClass]="{'selected': selectedSize === size}"
+              (click)="selectSize(size)"
+            >
+              {{ size }}
+            </div>
+          </div>
         </div>
         <div class="mt-3 text-center">
           <button mat-raised-button color="warn" (click)="addToCart()">Thêm vào giỏ hàng</button>

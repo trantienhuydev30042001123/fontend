@@ -2,3 +2,15 @@
 .me-4{
   margin-right: 40px;
 }
+.icon{
+  float: left;
+  font-size: 18px;
+
+}
+.text{
+  float: left;
+  font-size: 16px;
+}
+.sumtext{
+  clear: both;
+}

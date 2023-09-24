@@ -9,30 +9,31 @@
           class="w-75 example-full-width" >
             <mat-label> Họ và tên</mat-label>
             <input matInput
-                   [(ngModel)]="order.fullname"
-            name="fullname" >
+                    [(ngModel)]="order.fullname" name="fullname"  matInput  #fullname="ngModel" required maxlength="100">
+            <mat-error *ngIf="fullname.hasError('required')">Vui lòng nhập họ và tên</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline"
                           class="w-75">
             <mat-label> Địa chỉ</mat-label>
             <input matInput
-                   [(ngModel)]="order.address"
-                   name="fullname">
+                   [(ngModel)]="order.address" name="address"  matInput  #address="ngModel" required maxlength="100">
+            <mat-error *ngIf="address.hasError('required')">Vui lòng nhập địa chỉ</mat-error>
+
           </mat-form-field>
 
           <mat-form-field appearance="outline"
                           class="w-75">
             <mat-label> Số điện thoại </mat-label>
-            <input matInput
-                   [(ngModel)]="order.sdt"
-                   name="fullname">
+            <input matInput [(ngModel)]="order.sdt" name="sdt"  matInput  #sdt="ngModel" required maxlength="10" pattern="[0-9]*">
+            <mat-error *ngIf="sdt.hasError('required') && !sdt.hasError('pattern')">Vui lòng nhập số điện thoại</mat-error>
+            <mat-error *ngIf="sdt.hasError('pattern')">Vui lòng nhập số không nhập chữ</mat-error>
           </mat-form-field>
           <div>
             <mat-label style="font-weight: bold">Phương thức thanh toán : (Thanh toán khi nhận hàng.)</mat-label>
           </div>
           <div align="right" style="margin-top: 20px">
-            <button type="submit" mat-raised-button color="warn"> Đặt hàng</button>
+            <button [disabled]="!orderForm.valid"  type="submit" mat-raised-button color="warn"> Đặt hàng</button>
           </div>
         </form>
       </div>
@@ -43,6 +44,7 @@
             <th>STT</th>
             <th>Tên sản phẩm</th>
             <th>Ảnh</th>
+            <th>Size</th>
             <th>Số lượng</th>
             <th>Giá sản phẩm</th>
           </tr>
@@ -52,12 +54,15 @@
             <td>{{i + 1}}</td>
             <td class="nameP">{{p.nameP}}</td>
             <td class="imageP"><img src="{{p.imageP}}"></td>
+            <td *ngIf="p.size != 0">{{p.size}}</td>
+            <td *ngIf="p.size == 0">freesize</td>
+
             <td>{{p.quantity}}</td>
-            <td>{{p.priceP}}đ</td>
+            <td>{{formatPrice(p.priceP)}}đ</td>
           </tr>
           </tbody>
           <div class="total">
-            <p class="p-total">Thành tiền : {{totalMoney}}đ</p>
+            <p *ngIf="totalMoney != 0" class="p-total">Thành tiền : {{formatPrice(totalMoney)}}đ</p>
           </div>
         </table>
       </div>

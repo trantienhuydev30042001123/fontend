@@ -1,5 +1,8 @@
 <div>
   <app-nav-bar class="navbar1"></app-nav-bar>
+
+  <h1>Các sản phẩm của hãng {{nameCategory}}</h1>
+  <mat-divider></mat-divider>
   <div class="container1 mt-5">
     <mat-grid-list class="view-project"  cols="5"  rowHeight="2:3" gutterSize="20">
       <mat-grid-tile *ngFor="let p of product|  paginate: { itemsPerPage: 10, currentPage: p }">
@@ -15,7 +18,7 @@
             <star-rating class="rating" [value]="p.star" uncheckedcolor="black" size="20px" [readonly]="false" ></star-rating>
           </div>
           <div class="product-price">
-            <p class="product-price-start">{{p.price}}đ</p><p><b>{{p.lastprice}}đ</b></p>
+            <p class="product-price-start">{{formatPrice(p.price)}}đ</p><p><b>{{formatPrice(p.lastprice)}}đ</b></p>
           </div>
           <div mat class=" button">
             <button mat-raised-button color="warn" style="margin-bottom: 20px" (click)="showProductDetails(p.id)" >Chi tiết</button>

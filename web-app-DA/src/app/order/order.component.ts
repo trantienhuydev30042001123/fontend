@@ -14,23 +14,30 @@ export class OrderComponent implements OnInit {
   orderDetails: orderDetailsDTO[] = [];
   order: orderDTO[] = [];
   product: productDTO[] = [];
+  userData: any;
+
 
   constructor(private router: Router,
               private helperService: HelperService,) {
   }
 
   ngOnInit(): void {
+    const userString = localStorage.getItem('ID_Key');
+    if (userString) {
+      this.userData = JSON.parse(userString);
+    }
     this.getListOrder();
     this.getListOrderDetails();
   }
 
   public getListOrder(): void {
     this.helperService
-      .getAll(
-        "order"
+      .getList(
+        "order", this.userData
       )
       .then((res: any) => {
         this.order = res;
+        console.log(res)
         for (let a of this.order) {
           let product1: productDTO[] = [];
           this.orderDetails = a.orderDetail;
@@ -42,7 +49,6 @@ export class OrderComponent implements OnInit {
             let name = this.product;
             name.forEach((item: any) => {
               name.push(item.name);
-              console.log(name);
             })
         }
       })
@@ -64,4 +70,39 @@ export class OrderComponent implements OnInit {
       })
   }
 
+  getSizesToDisplay(sizes: number[]): string[] {
+    const displaySizes: string[] = [];
+    for (const size of sizes) {
+      if (size === 0) {
+        displaySizes.push('freesize');
+      } else {
+        displaySizes.push(size.toString());
+      }
+    }
+    return displaySizes;
+  }
+
+  changeStatus(status:number): string{
+    let beforeStatus: string = '';
+    if (status == 0){
+      beforeStatus = 'Chờ xử lý';
+    }else if (status == 1){
+      beforeStatus = 'Đã xử lí';
+    }else if (status == 2){
+      beforeStatus = 'Đã giao hàng';
+    }else{
+      beforeStatus = 'Hủy';
+    }
+    console.log(beforeStatus)
+    return beforeStatus;
+  }
+
+  formatDate(date: string): string {
+    const formattedDate = new Date(date).toLocaleDateString('en-GB');
+    return formattedDate;
+  }
+
+  formatPrice(price: number): string {
+    return price.toLocaleString('vi-VN');
+  }
 }

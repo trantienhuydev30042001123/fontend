@@ -1,0 +1,11 @@
+<div class="dialog">
+  <div class="circle-icon" *ngIf="data.isSuccess">
+    <mat-icon>done</mat-icon>
+  </div>
+  <div class="circle-icon-clear" *ngIf="!data.isSuccess">
+    <mat-icon>clear</mat-icon>
+  </div>
+  <div style="font-size: 20px; font-weight: bold; margin-top: 10px">Thông báo</div>
+  <div style="font-size: 16px; margin-top: 10px">{{ data.isSuccess ? 'Bạn đã đặt hàng thành công' : 'Bạn chưa đặt hàng thành công' }}</div>
+  <button (click)="closeDialog()" class="submit" type="submit">OK</button>
+</div>

@@ -1,0 +1,46 @@
+<form >
+<!--  <div class="flex items-center" mat-dialog-title>-->
+<!--<div class="close">-->
+<!--  <button class="text-secondary" mat-dialog-close mat-icon-button type="button">-->
+<!--    <mat-icon>close</mat-icon>-->
+<!--  </button>-->
+<!--</div>-->
+<!--</div>-->
+<h1 style="text-align: center; padding-top: 10px">Cập nhật thông tin</h1>
+<mat-divider class="-mx-6 text-border"></mat-divider>
+
+<mat-dialog-content *ngFor="let p of user" class="flex flex-col">
+  <div class="flex flex-col sm:flex-row">
+    <mat-form-field  class="example-full-width">
+      <mat-label>Họ tên</mat-label>
+      <input  (blur)="trimData('name', $any($event.target).value)" name="name" value="{{p.name}}" matInput required
+             type="text">
+    </mat-form-field>
+  </div>
+  <div class="flex flex-col sm:flex-row">
+    <mat-form-field  class="example-full-width">
+      <mat-label>Username</mat-label>
+      <input  (blur)="trimData('username', $any($event.target).value)"  name="username" value="{{p.username}}" matInput required
+             type="text">
+    </mat-form-field>
+  </div>
+  <div class="flex flex-col sm:flex-row">
+    <mat-form-field  class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input  (blur)="trimData('email', $any($event.target).value)" name="email" value="{{p.email}}" matInput required
+             type="text">
+    </mat-form-field>
+  </div>
+<!--  <div class="flex flex-col sm:flex-row">-->
+<!--    <mat-form-field  class="example-full-width">-->
+<!--      <mat-label>Avatar</mat-label>-->
+<!--      <input  (blur)="trimData('avatar', $any($event.target).value)" name="avatar" matInput required-->
+<!--             type="text">-->
+<!--    </mat-form-field>-->
+<!--  </div>-->
+</mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button" style="text-align: center">Hủy</button>
+    <button (click)="updateProfile()" style="background-color: #44dc8c" color="accent" mat-flat-button type="submit">Lưu</button>
+  </mat-dialog-actions>
+</form>

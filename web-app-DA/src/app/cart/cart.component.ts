@@ -26,6 +26,7 @@ export class CartComponent implements OnInit {
   totalMoney: number;
   idC: number[];
   idP: number[];
+  sizeP: number[];
   products: any[];
   userData: any;
   navBar: NavBarComponent;
@@ -97,7 +98,13 @@ export class CartComponent implements OnInit {
           id.push(item.id);
         })
         this.idC = id;
-        console.log(res)
+
+        let size: number[] = [];
+        let carts4 = res;
+        carts4.forEach((item: any) => {
+          size.push(item.size);
+        })
+        this.sizeP = size;
       })
       .catch((error) => {
         console.log("loi")
@@ -131,7 +138,10 @@ export class CartComponent implements OnInit {
 
   buyProduct() {
     this.router.navigate(['buy-product'],{
-      queryParams: {data:this.idP,data1:this.idC}
+      queryParams: {
+        data:this.idP,
+        data1:this.idC,
+        data2:this.sizeP}
     })
   }
 
@@ -150,5 +160,9 @@ export class CartComponent implements OnInit {
       }).catch(() => {
       console.log("loi")
     })
+  }
+
+  formatPrice(price: number): string {
+    return price.toLocaleString('vi-VN');
   }
 }

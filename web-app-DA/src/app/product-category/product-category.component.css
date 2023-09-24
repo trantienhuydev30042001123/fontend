@@ -76,4 +76,10 @@ mat-grid-tile{
   text-align: center;
   margin-top: 30px;
 }
+h1{
+  text-align: center;
+  margin-top: 22px;
+  font-size: 30px;
+  font-weight: bold;
+}
 
