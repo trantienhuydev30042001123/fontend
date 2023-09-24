@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "web-app-da"
-  }
+    "default": "shopgiayhuytt-5a836",
+    "DA": "shopgiayhuytt-5a836"
+  },
+  "targets": {},
+  "etags": {}
 }
