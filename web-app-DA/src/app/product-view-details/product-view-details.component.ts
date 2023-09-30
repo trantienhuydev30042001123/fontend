@@ -10,6 +10,7 @@ import { AuthService } from '../service/auth.service';
 import { SignIn } from '../model/SignIn';
 import { CartService } from '../service/cart.service';
 import { sizeDTO } from '../dto/sizeDTO';
+import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 
 @Component({
   selector: 'app-product-view-details',
@@ -37,7 +38,9 @@ export class ProductViewDetailsComponent implements OnInit{
               private router: Router,
               public dialogRef: MatDialogRef<ProductViewDetailsComponent>,
               private authService: AuthService,
-              private cartService: CartService) {
+              private cartService: CartService,
+              private dialog: MatDialog,
+  ) {
   }
   ngOnInit(): void {
     // this.cartComponent.getListCart()
@@ -103,7 +106,11 @@ export class ProductViewDetailsComponent implements OnInit{
       this.helperService
         .addCart("cart", this.id,this.userData, this.selectedSize)
         .then((res: any) => {
+          this.dialog.open(CartDialogComponent,{
+            panelClass: 'dialog',
+          });
           this.cartService.updateCart();
+          
         })
         .catch((error) => {
           console.log("loi");

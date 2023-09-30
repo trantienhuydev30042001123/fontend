@@ -1,0 +1,28 @@
+.dialog{
+  text-align: center;
+  padding: 30px 40px 15px 40px;
+}
+
+.circle-icon{
+  display: inline-block;
+  position: relative;
+  font-size: 32px;
+  border-radius: 15px;
+  color: darkgreen;
+}
+
+
+.circle-icon::before {
+  border: 2px solid darkgreen;
+  content: '';
+  position: absolute;
+  top: 50%; /* Đặt top là 50% để căn giữa theo chiều dọc */
+  left: 50%; /* Đặt left là 50% để căn giữa theo chiều ngang */
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%); /* Dịch chuyển ngược lại 50% chiều dọc và 50% chiều ngang */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

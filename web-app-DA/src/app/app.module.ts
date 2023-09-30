@@ -41,6 +41,7 @@ import {ProfileUpdateComponent} from './profile/profile-update/profile-update.co
 import {
   BuyProductSuccessDialogComponent
 } from './buy-product/buy-product-success-dialog/buy-product-success-dialog.component';
+import { CartDialogComponent } from './product-view-details/cart-dialog/cart-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
     BuyProductComponent,
     OrderComponent,
     ProfileUpdateComponent,
-    BuyProductSuccessDialogComponent
+    BuyProductSuccessDialogComponent,
+    CartDialogComponent
   ],
   imports: [
     HttpClientModule,
